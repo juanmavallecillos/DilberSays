@@ -1,0 +1,38 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+  <title>Benvinguda</title>
+  <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+
+<h:body class="w3-light-grey">
+<h:panelGroup rendered="#{!userLoginBean.isLogged()}">
+	<h:outputLink value="index.xhtml">Please sign in</h:outputLink>
+</h:panelGroup>
+
+
+<h:panelGroup rendered="#{userLoginBean.isLogged()}">
+	<h:form>
+	<header class="w3-container w3-center w3-padding-32">
+	<h1><b><h:outputText value="Welcome #{userLoginBean.getLogin()} "/><br/></b></h1>
+	<SPAN class="w3-tag"><h:commandLink value="logout" action="#{userLoginController.logout()}"></h:commandLink></SPAN>
+	</header>	
+	<div class="w3-content w3-center">
+	<h3>Dilbert Says:</h3><br/>
+	<h:outputText id="dita" value="#{dilbertSaysController.getRandomSay()}"></h:outputText>
+	<hr></hr>
+	<h:commandButton value="Another say">
+	<f:ajax render="dita"/>
+	</h:commandButton>
+	</div>
+
+	</h:form>
+</h:panelGroup>
+</h:body>
+
+</html>
